@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>852</width>
+    <height>581</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="ON">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>140</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ON</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="OFF">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>140</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OFF</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="_exit_">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>400</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </widget>
+  <widget class="QDial" name="dial">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>90</y>
+     <width>371</width>
+     <height>291</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>_exit_</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>over()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>419</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>426</x>
+     <y>377</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ON</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>turn_on()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>159</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>80</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OFF</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>turn_off()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>178</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>over()</slot>
+  <slot>turn_on()</slot>
+  <slot>turn_off()</slot>
+ </slots>
+</ui>
