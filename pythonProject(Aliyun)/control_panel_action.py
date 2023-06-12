@@ -1,7 +1,10 @@
 import ctypes
 import sys
 import threading
+import DOOR_action
+import LED_action
 import control_panel
+import LED
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QFileDialog, QMessageBox
 from PyQt5 import QtWidgets
 import MainWindow_action
@@ -15,16 +18,16 @@ import random
 
 
 # 设备证书（ProductKey、DeviceName和DeviceSecret），三元组
-productKey = 'iuslKy1Y7Wv'
-deviceName = 'RFbTIkYsmxz4AHYHr3KV'
-deviceSecret = '57a3084b1c20b1641522a518406661fc'
+productKey = 'iv9ediRKzGd'
+deviceName = 'door'
+deviceSecret = '316c00f534b2b1606ea9576a06c8b8ad'
 
 # ClientId Username和 Password 签名模式下57a3084b1c20b1641522a518406661fc的设置方法，参考文档 https://help.aliyun.com/document_detail/73742.html?spm=a2c4g.11186623.6.614.c92e3d45d80aqG
 # MQTT - 合成connect报文中使用的 ClientID、Username、Password
-mqttClientId ='iuslKy1Y7Wv.RFbTIkYsmxz4AHYHr3KV|securemode=2,signmethod=hmacsha256,timestamp=1686299807850|'
-mqttUsername = 'RFbTIkYsmxz4AHYHr3KV&iuslKy1Y7Wv'
+mqttClientId ='iv9ediRKzGd.door|securemode=2,signmethod=hmacsha256,timestamp=1686551547908|'
+mqttUsername = 'door&iv9ediRKzGd'
 content = 'clientId' + deviceName + 'deviceName' + deviceName + 'productKey' + productKey
-mqttPassword = '6c2309f823591942c81fdee8d48b6411142fe9c826a67f7c03f95d851811b067'
+mqttPassword = '8d3eeb88705b53c8a1f49162613cc899712812543aa8db46efc1f0e007d6b25e'
 
 # 接入的服务器地址
 regionId = 'cn-shanghai'
@@ -36,12 +39,12 @@ topic_post = '/sys/' + productKey + '/' + deviceName + '/thing/event/property/po
 # Topic，set，服务器向客户端下发消息
 topic_set = '/sys/' + productKey + '/' + deviceName + '/thing/service/property/set'
 
-# 物模型名称的前缀（去除后缀的数字）
-modelName = 'LightSwitch'
+
 
 # 下发的设置报文示例：{"method":"thing.service.property.set","id":"1227667605","params":{"PowerSwitch_1":1},"version":"1.0.0"}
 # json合成上报开关状态的报文
 def json_switch_set(num, status):       #开关控制
+    modelName = 'LEDSwitch_'   # 物模型名称的前缀（去除后缀的数字）
     switch_info = {}
     switch_data = json.loads(json.dumps(switch_info))
     switch_data['method'] = '/thing/event/property/post'
@@ -50,7 +53,26 @@ def json_switch_set(num, status):       #开关控制
     switch_data['params'] = switch_status
     return json.dumps(switch_data, ensure_ascii=False)
 
+def curtain_position_set(num, status):       #开关控制
+    modelName = 'CurtainPosition_'
+    scope_info = {}
+    scope_data = json.loads(json.dumps(scope_info))
+    scope_data['method'] = '/thing/event/property/post'
+    scope_data['id'] = random.randint(100000000,999999999) # 随机数即可，用于让服务器区分开报文
+    scope_status = {modelName + num : status}
+    scope_data['params'] = scope_status
+    return json.dumps(scope_data, ensure_ascii=False)
 # 开关的状态，0/1
+
+def door_switch_set(num, status):       #门开关控制
+    modelName = 'Lock_status'
+    switch_info = {}
+    switch_data = json.loads(json.dumps(switch_info))
+    switch_data['method'] = '/thing/event/property/post'
+    switch_data['id'] = random.randint(100000000,999999999) # 随机数即可，用于让服务器区分开报文
+    switch_status = {modelName: status}
+    switch_data['params'] = switch_status
+    return json.dumps(switch_data, ensure_ascii=False)
 
 # 建立mqtt连接对象
 client = mqtt.Client(mqttClientId, protocol=mqtt.MQTTv311, clean_session=True)
@@ -108,7 +130,22 @@ def LED_Off():
     switchPost = json_switch_set('1', 0)
     client.publish(topic_post, payload=switchPost, qos=0)
 
-class thread_with_exception(threading.Thread):
+def Door_Open():
+    switchPost = door_switch_set('1', 1)
+    client.publish(topic_post, payload=switchPost, qos=0)
+
+def Door_Close():
+    switchPost = door_switch_set('1', 0)
+    client.publish(topic_post, payload=switchPost, qos=0)
+
+def Curtain_1_PositionChange(status):
+    CurtainPost = curtain_position_set('1', status)
+    client.publish(topic_post, payload=CurtainPost, qos=0)
+
+def Curtain_2_PosttionChange(status):
+    CurtainPost = curtain_position_set('2', status)
+    client.publish(topic_post, payload=CurtainPost, qos=0)
+class thread_with_exception(threading.Thread):  #在线程中申请异常处理中断线程
     def __init__(self, name):
         threading.Thread.__init__(self)
         self.name = name
@@ -136,14 +173,22 @@ class controlpanelactions(control_panel.Ui_Form, QMainWindow):
         super().__init__()
         self.setupUi(self)
 
-        global t1
-        t1 = threading.Thread(target=mqtt_connect_aliyun_iot_platform, )
-        t1.start()
-
-
+        self.GoLED.clicked.connect(self.open_LED)   #前往LED控制面板
+        self.GoDOOR.clicked.connect(self.open_DOOR)#前往DOOR控制面板
         self._exit_.clicked.connect(self.over)  #退出按钮
-        self.ON.clicked.connect(self.turn_on)
-        self.OFF.clicked.connect(self.turn_off)
+
+
+
+    def open_LED(self):
+        self.LED=LED_action.LEDaction()
+        self.LED.show()
+        self.close()
+
+    def open_DOOR(self):
+        self.DOOR=DOOR_action.DOORaction()
+        self.DOOR.show()
+        self.close()
+
     def over(self):
         t1 = thread_with_exception('Thread 1')
         t1.start()
@@ -151,12 +196,3 @@ class controlpanelactions(control_panel.Ui_Form, QMainWindow):
         t1.raise_exception()
         t1.join()     #退出线程1
         self.close()
-
-    def turn_on(self):
-        t2 = threading.Thread(target=LED_On, )
-        t2.start()
-        t2.join()
-    def turn_off(self):
-        t2 = threading.Thread(target=LED_Off, )
-        t2.start()
-        t2.join()

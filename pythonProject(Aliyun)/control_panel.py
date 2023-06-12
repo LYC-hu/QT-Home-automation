@@ -14,29 +14,38 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(568, 450)
-        self.ON = QtWidgets.QPushButton(Form)
-        self.ON.setGeometry(QtCore.QRect(30, 140, 93, 28))
-        self.ON.setObjectName("ON")
-        self.OFF = QtWidgets.QPushButton(Form)
-        self.OFF.setGeometry(QtCore.QRect(130, 140, 93, 28))
-        self.OFF.setObjectName("OFF")
+        Form.resize(852, 581)
         self._exit_ = QtWidgets.QPushButton(Form)
-        self._exit_.setGeometry(QtCore.QRect(260, 400, 93, 28))
+        self._exit_.setGeometry(QtCore.QRect(270, 410, 93, 28))
         self._exit_.setObjectName("_exit_")
-        self.dial = QtWidgets.QDial(Form)
-        self.dial.setGeometry(QtCore.QRect(390, 130, 50, 64))
-        self.dial.setObjectName("dial")
+        self.GoLED = QtWidgets.QPushButton(Form)
+        self.GoLED.setGeometry(QtCore.QRect(50, 130, 93, 28))
+        self.GoLED.setObjectName("GoLED")
+        self.label = QtWidgets.QLabel(Form)
+        self.label.setGeometry(QtCore.QRect(80, 60, 101, 51))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.GoDOOR = QtWidgets.QPushButton(Form)
+        self.GoDOOR.setGeometry(QtCore.QRect(210, 130, 81, 31))
+        self.GoDOOR.setObjectName("GoDOOR")
+        self.label_2 = QtWidgets.QLabel(Form)
+        self.label_2.setGeometry(QtCore.QRect(230, 60, 101, 51))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_2.setFont(font)
+        self.label_2.setObjectName("label_2")
 
         self.retranslateUi(Form)
         self._exit_.clicked.connect(Form.over) # type: ignore
-        self.ON.clicked.connect(Form.turn_on) # type: ignore
-        self.OFF.clicked.connect(Form.turn_off) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.ON.setText(_translate("Form", "ON"))
-        self.OFF.setText(_translate("Form", "OFF"))
         self._exit_.setText(_translate("Form", "退出"))
+        self.GoLED.setText(_translate("Form", "GO！"))
+        self.label.setText(_translate("Form", "LED"))
+        self.GoDOOR.setText(_translate("Form", "START!"))
+        self.label_2.setText(_translate("Form", "DOOR"))

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="ON">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ON</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="OFF">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>60</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OFF</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="previous">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>200</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>返回</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>ON</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>turn_on()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>81</x>
+     <y>71</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>81</x>
+     <y>144</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>OFF</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>turn_off()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>220</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>previous</sender>
+   <signal>clicked()</signal>
+   <receiver>Form</receiver>
+   <slot>go_con_panel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>212</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>150</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>turn_on()</slot>
+  <slot>turn_off()</slot>
+  <slot>go_con_panel()</slot>
+ </slots>
+</ui>

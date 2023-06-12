@@ -13,37 +13,11 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="ON">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>140</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>ON</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="OFF">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>140</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>OFF</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="_exit_">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>400</y>
+     <x>270</x>
+     <y>410</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -52,14 +26,66 @@
     <string>退出</string>
    </property>
   </widget>
-  <widget class="QDial" name="dial">
+  <widget class="QPushButton" name="GoLED">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>90</y>
-     <width>371</width>
-     <height>291</height>
+     <x>50</x>
+     <y>130</y>
+     <width>93</width>
+     <height>28</height>
     </rect>
+   </property>
+   <property name="text">
+    <string>GO！</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>60</y>
+     <width>101</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>LED</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="GoDOOR">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>130</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>START!</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>60</y>
+     <width>101</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>DOOR</string>
    </property>
   </widget>
  </widget>
@@ -78,38 +104,6 @@
     <hint type="destinationlabel">
      <x>426</x>
      <y>377</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ON</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>turn_on()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>76</x>
-     <y>159</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>80</x>
-     <y>213</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>OFF</sender>
-   <signal>clicked()</signal>
-   <receiver>Form</receiver>
-   <slot>turn_off()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>179</x>
-     <y>164</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>178</x>
-     <y>260</y>
     </hint>
    </hints>
   </connection>
