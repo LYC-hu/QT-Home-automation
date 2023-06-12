@@ -15,11 +15,21 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(542, 466)
-        self.horizontalSlider = QtWidgets.QSlider(Form)
-        self.horizontalSlider.setGeometry(QtCore.QRect(90, 50, 160, 22))
-        self.horizontalSlider.setMaximum(100)
-        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
-        self.horizontalSlider.setObjectName("horizontalSlider")
+        self.curtain_1 = QtWidgets.QSlider(Form)
+        self.curtain_1.setGeometry(QtCore.QRect(90, 50, 160, 22))
+        self.curtain_1.setMaximum(100)
+        self.curtain_1.setOrientation(QtCore.Qt.Horizontal)
+        self.curtain_1.setObjectName("curtain_1")
+        self.previous = QtWidgets.QPushButton(Form)
+        self.previous.setGeometry(QtCore.QRect(180, 340, 75, 31))
+        self.previous.setObjectName("previous")
+        self.curtain_1_num = QtWidgets.QSpinBox(Form)
+        self.curtain_1_num.setGeometry(QtCore.QRect(260, 40, 51, 41))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.curtain_1_num.setFont(font)
+        self.curtain_1_num.setMaximum(100)
+        self.curtain_1_num.setObjectName("curtain_1_num")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -27,3 +37,4 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        self.previous.setText(_translate("Form", "返回"))
