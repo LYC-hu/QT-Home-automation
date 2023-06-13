@@ -13,10 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="OPEN">
+  <widget class="QPushButton" name="OPEN_FRONT">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>150</x>
      <y>60</y>
      <width>75</width>
      <height>23</height>
@@ -26,7 +26,7 @@
     <string>OPEN</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="CLOSE">
+  <widget class="QPushButton" name="CLOSE_FRONT">
    <property name="geometry">
     <rect>
      <x>230</x>
@@ -50,6 +50,58 @@
    </property>
    <property name="text">
     <string>返回</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>60</y>
+     <width>72</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>前门</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>130</y>
+     <width>72</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>后门</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="CLOSE_BACK">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>130</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CLOSE</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="OPEN_BACK">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>130</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OPEN</string>
    </property>
   </widget>
  </widget>

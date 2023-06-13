@@ -6,18 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>625</width>
+    <height>472</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="ON">
+  <widget class="QPushButton" name="LED1ON">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>60</y>
+     <x>150</x>
+     <y>30</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -26,11 +26,11 @@
     <string>ON</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="OFF">
+  <widget class="QPushButton" name="LED1OFF">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>60</y>
+     <x>240</x>
+     <y>30</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -52,11 +52,141 @@
     <string>返回</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="LED2ON">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>60</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ON</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="LED2OFF">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>60</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OFF</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="LED3ON">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>90</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ON</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="LED3OFF">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>90</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OFF</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="LED4ON">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>120</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ON</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="LED4OFF">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>120</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OFF</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>前排灯LED_1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>64</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>中前排灯LED_2</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>101</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>中后排灯LED_3</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>后排灯LED_4</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>ON</sender>
+   <sender>LED1ON</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
    <slot>turn_on()</slot>
@@ -72,7 +202,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>OFF</sender>
+   <sender>LED1OFF</sender>
    <signal>clicked()</signal>
    <receiver>Form</receiver>
    <slot>turn_off()</slot>

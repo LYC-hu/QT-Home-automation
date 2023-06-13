@@ -12,18 +12,32 @@ class DOORaction(DOOR.Ui_Form, QMainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.OPEN.clicked.connect(self.turn_open)
-        self.CLOSE.clicked.connect(self.turn_close)
+        self.OPEN_FRONT.clicked.connect(self.Front_open)
+        self.CLOSE_FRONT.clicked.connect(self.Front_close)
+
+        self.OPEN_FRONT.clicked.connect(self.Back_open)
+        self.CLOSE_FRONT.clicked.connect(self.Back_close)
+
         self.previous.clicked.connect(self.go_con_panel)
 
     # 门的开关
-    def turn_open(self):
-        t2 = threading.Thread(target=control_panel_action.Door_Open, )
+    def Front_open(self):
+        t2 = threading.Thread(target=control_panel_action.Front_Door_Open(), )
         t2.start()
         t2.join()
 
-    def turn_close(self):
-        t2 = threading.Thread(target=control_panel_action.Door_Close, )
+    def Front_close(self):
+        t2 = threading.Thread(target=control_panel_action.Front_Door_Close(), )
+        t2.start()
+        t2.join()
+
+    def Back_open(self):
+        t2 = threading.Thread(target=control_panel_action.Back_Door_Open(), )
+        t2.start()
+        t2.join()
+
+    def Back_close(self):
+        t2 = threading.Thread(target=control_panel_action.Back_Door_Close(), )
         t2.start()
         t2.join()
 

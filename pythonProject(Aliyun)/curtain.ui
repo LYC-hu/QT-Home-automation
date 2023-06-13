@@ -16,7 +16,7 @@
   <widget class="QSlider" name="curtain_1">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>220</x>
      <y>50</y>
      <width>160</width>
      <height>22</height>
@@ -45,9 +45,9 @@
   <widget class="QSpinBox" name="curtain_1_num">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>390</x>
      <y>40</y>
-     <width>51</width>
+     <width>71</width>
      <height>41</height>
     </rect>
    </property>
@@ -58,6 +58,66 @@
    </property>
    <property name="maximum">
     <number>100</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>50</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>前窗帘</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="curtain_2">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>190</y>
+     <width>160</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <number>100</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="curtain_2_num">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>180</y>
+     <width>71</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="maximum">
+    <number>100</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>190</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>后窗帘</string>
    </property>
   </widget>
  </widget>

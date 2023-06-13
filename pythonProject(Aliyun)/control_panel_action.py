@@ -20,16 +20,18 @@ import random
 
 
 # 设备证书（ProductKey、DeviceName和DeviceSecret），三元组
+import fan1action
+
 productKey = 'iuslKy1Y7Wv'
 deviceName = 'RFbTIkYsmxz4AHYHr3KV'
 deviceSecret = '57a3084b1c20b1641522a518406661fc'
 
 # ClientId Username和 Password 签名模式下57a3084b1c20b1641522a518406661fc的设置方法，参考文档 https://help.aliyun.com/document_detail/73742.html?spm=a2c4g.11186623.6.614.c92e3d45d80aqG
 # MQTT - 合成connect报文中使用的 ClientID、Username、Password
-mqttClientId ='iuslKy1Y7Wv.RFbTIkYsmxz4AHYHr3KV|securemode=2,signmethod=hmacsha256,timestamp=1686299807850|'
+mqttClientId ='iuslKy1Y7Wv.RFbTIkYsmxz4AHYHr3KV|securemode=2,signmethod=hmacsha256,timestamp=1686618661186|'
 mqttUsername = 'RFbTIkYsmxz4AHYHr3KV&iuslKy1Y7Wv'
 content = 'clientId' + deviceName + 'deviceName' + deviceName + 'productKey' + productKey
-mqttPassword = '6c2309f823591942c81fdee8d48b6411142fe9c826a67f7c03f95d851811b067'
+mqttPassword = '4355e02a97cffbba9a657ed7320d44854f9992d0864a97fd8b15c3c432cc5c92'
 
 # 接入的服务器地址
 regionId = 'cn-shanghai'
@@ -55,6 +57,26 @@ def json_switch_set(num, status):       #开关控制
     switch_data['params'] = switch_status
     return json.dumps(switch_data, ensure_ascii=False)
 
+def Fan_Switch_set(num, status):       #开关控制
+    modelName = 'FanSwitch_'
+    scope_info = {}
+    scope_data = json.loads(json.dumps(scope_info))
+    scope_data['method'] = '/thing/event/property/post'
+    scope_data['id'] = random.randint(100000000,999999999) # 随机数即可，用于让服务器区分开报文
+    scope_status = {modelName + num: status}
+    scope_data['params'] = scope_status
+    return json.dumps(scope_data, ensure_ascii=False)
+
+def Fan_WindSpeed_set(num, status):       #开关控制
+    modelName = 'WindSpeed_'
+    scope_info = {}
+    scope_data = json.loads(json.dumps(scope_info))
+    scope_data['method'] = '/thing/event/property/post'
+    scope_data['id'] = random.randint(100000000,999999999) # 随机数即可，用于让服务器区分开报文
+    scope_status = {modelName + num: status}
+    scope_data['params'] = scope_status
+    return json.dumps(scope_data, ensure_ascii=False)
+
 def curtain_position_set(num, status):       #开关控制
     modelName = 'CurtainPosition_'
     scope_info = {}
@@ -66,12 +88,12 @@ def curtain_position_set(num, status):       #开关控制
     return json.dumps(scope_data, ensure_ascii=False)
 
 def door_switch_set(num, status):       #门开关控制
-    modelName = 'Lock_status'
+    modelName = 'Lock_control_'
     switch_info = {}
     switch_data = json.loads(json.dumps(switch_info))
     switch_data['method'] = '/thing/event/property/post'
     switch_data['id'] = random.randint(100000000,999999999) # 随机数即可，用于让服务器区分开报文
-    switch_status = {modelName: status}
+    switch_status = {modelName + num: status}
     switch_data['params'] = switch_status
     return json.dumps(switch_data, ensure_ascii=False)
 # 建立mqtt连接对象
@@ -123,28 +145,101 @@ def mqtt_connect_aliyun_iot_platform():
         print('阿里云物联网平台MQTT服务器连接错误，请检查设备证书三元组、及接入点的域名！')
     client.loop_forever()
 
-def LED_On():
+def LED_1_On():
     switchPost = json_switch_set('1', 1)
     client.publish(topic_post, payload=switchPost, qos=0)
-def LED_Off():
+def LED_1_Off():
     switchPost = json_switch_set('1', 0)
     client.publish(topic_post, payload=switchPost, qos=0)
-
-def Door_Open():
+def LED_2_On():
+    switchPost = json_switch_set('2', 1)
+    client.publish(topic_post, payload=switchPost, qos=0)
+def LED_2_Off():
+    switchPost = json_switch_set('2', 0)
+    client.publish(topic_post, payload=switchPost, qos=0)
+def LED_3_On():
+    switchPost = json_switch_set('3', 1)
+    client.publish(topic_post, payload=switchPost, qos=0)
+def LED_3_Off():
+    switchPost = json_switch_set('3', 0)
+    client.publish(topic_post, payload=switchPost, qos=0)
+def LED_4_On():
+    switchPost = json_switch_set('4', 1)
+    client.publish(topic_post, payload=switchPost, qos=0)
+def LED_4_Off():
+    switchPost = json_switch_set('4', 0)
+    client.publish(topic_post, payload=switchPost, qos=0)
+def Front_Door_Open():
     switchPost = door_switch_set('1', 1)
     client.publish(topic_post, payload=switchPost, qos=0)
 
-def Door_Close():
+def Front_Door_Close():
     switchPost = door_switch_set('1', 0)
+    client.publish(topic_post, payload=switchPost, qos=0)
+
+def Back_Door_Open():
+    switchPost = door_switch_set('2', 1)
+    client.publish(topic_post, payload=switchPost, qos=0)
+
+def Back_Door_Close():
+    switchPost = door_switch_set('2', 0)
     client.publish(topic_post, payload=switchPost, qos=0)
 
 def Curtain_1_PositionChange(status):
     CurtainPost = curtain_position_set('1', status)
     client.publish(topic_post, payload=CurtainPost, qos=0)
 
-def Curtain_2_PosttionChange(status):
+def Curtain_2_PositionChange(status):
     CurtainPost = curtain_position_set('2', status)
     client.publish(topic_post, payload=CurtainPost, qos=0)
+
+
+def stalls_1_3():
+    switchPost = Fan_WindSpeed_set('1',3)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_1_2():
+    switchPost = Fan_WindSpeed_set('1',2)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_1_1():
+    switchPost = Fan_WindSpeed_set('1',1)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_2_3():
+    switchPost = Fan_WindSpeed_set('2',3)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_2_2():
+    switchPost = Fan_WindSpeed_set('2',2)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_2_1():
+    switchPost = Fan_WindSpeed_set('2',1)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_3_3():
+    switchPost = Fan_WindSpeed_set('3',3)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_3_2():
+    switchPost = Fan_WindSpeed_set('3',2)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_3_1():
+    switchPost = Fan_WindSpeed_set('3',1)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
+def stalls_1_0():
+    switchPost = Fan_WindSpeed_set('1',0)
+    client.publish(topic_post,payload=switchPost,qos=0)
+def stalls_2_0():
+    switchPost = Fan_WindSpeed_set('2',0)
+    client.publish(topic_post,payload=switchPost,qos=0)
+def stalls_3_0():
+    switchPost = Fan_WindSpeed_set('3',0)
+    client.publish(topic_post,payload=switchPost,qos=0)
+
 class thread_with_exception(threading.Thread):  #在线程中申请异常处理中断线程
     def __init__(self, name):
         threading.Thread.__init__(self)
@@ -175,6 +270,7 @@ class controlpanelactions(control_panel.Ui_Form, QMainWindow):
 
         self.GoLED.clicked.connect(self.open_LED)   #前往LED控制面板
         self.GoDOOR.clicked.connect(self.open_DOOR)#前往DOOR控制面板
+        self.GoFANS.clicked.connect(self.open_fan)
         self._exit_.clicked.connect(self.over)  #退出按钮
         self.GoCURTAIN.clicked.connect(self.open_CURTAIN)
 
@@ -189,10 +285,45 @@ class controlpanelactions(control_panel.Ui_Form, QMainWindow):
         self.DOOR.show()
         self.close()
 
+    def open_fan(self):
+        self.Fan=fan1action.fan1action()
+        self.Fan.show()
+        self.close()
+
     def open_CURTAIN(self):
         self.CURTAIN=curtain_action.curtainaction()
         self.CURTAIN.show()
         self.close()
+
+
+    def turn_on(self):
+        t2 = threading.Thread(target=FAN_On, )
+        t2.start()
+        t2.join()
+
+    def stalls3(self):
+        t2 = threading.Thread(target=stalls_3, )
+        t2.start()
+        t2.join()
+
+    def stalls2(self):
+        t2 = threading.Thread(target=stalls_2, )
+        t2.start()
+        t2.join()
+
+    def stalls(self):
+        t2 = threading.Thread(target=stalls, )
+        t2.start()
+        t2.join()
+
+    def turn_off(self):
+        t2 = threading.Thread(target=FAN_Off, )
+        t2.start()
+        t2.join()
+        t3 = threading.Thread(target=stalls_0,)
+        t3.start()
+        t3.join()
+
 
     def over(self):
         t1 = thread_with_exception('Thread 1')
